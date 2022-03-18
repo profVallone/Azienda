@@ -4,7 +4,7 @@
     {
         private static readonly int pagaOraria = 200;
 
-        public Dirigente(string Nome, string Cognome, int eta, string data) : base(Nome, Cognome, eta, data)
+        public Dirigente(string Nome, string Cognome, int eta) : base(Nome, Cognome, eta)
         {
             base.ferie = 40;
         }

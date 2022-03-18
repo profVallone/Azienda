@@ -2,26 +2,21 @@
 
 namespace GestioneAzienda
 {
-    public abstract class Dipendente
+    public abstract class Dipendente: IComparable
     {
-        protected string Nome;
-        protected string Cognome;
+        protected string nome;
+        protected string cognome;
         protected int eta;
         protected DateTime data;
         protected int ferie;
         protected int giorniLavorati;
 
 
-        public Dipendente(string Nome, string Cognome, int eta, string data)
+        public Dipendente(string Nome, string Cognome, int eta)
         {
-            this.Nome = Nome;
-            this.Cognome = Cognome;
+            this.nome = Nome;
+            this.cognome = Cognome;
             this.eta = eta;
-            string[] sl = data.Split("-");
-            int y = Int32.Parse(sl[2]);
-            int m = Int32.Parse(sl[1]);
-            int d = Int32.Parse(sl[0]);
-            this.data = new DateTime(y,m,d);
             this.giorniLavorati = 0;
         }
 
@@ -39,37 +34,61 @@ namespace GestioneAzienda
 
         public void addGiorni(int g)
         {
-            if (g < 1)
-                throw new ParametroErrato(g, "Non puoi aggiungere giorni con valore negativo!");
             this.giorniLavorati += g; 
         }
 
-        internal string getCognome()
+        public string getCognome()
         {
-            return this.Cognome;
+            return this.cognome;
         }
 
-        internal string getNome()
+        public string getNome()
         {
-            return this.Nome;
+            return this.nome;
         }
 
         public bool prendiFerie(int g)
         {
-            if (g < 1)
-                throw new ParametroErrato(g);
-            if (g > this.ferie)            
-                return false;
+            Console.WriteLine("Il dipendente {0} {1} ha richiesto {2} ferie", this.nome, this.cognome, g);
+            if (g > this.ferie)
+                throw new FerieNonSufficienti("Hai richiesto troppe ferie!");
             this.ferie -= g;
+            return true;
+        }
+
+        public bool cediFerie(Dipendente d, int g)
+        {
+            if (this.GetType() != d.GetType())
+                throw new GradoDipendentiErrato("Dipendente non dello stesso grado!");
+            try 
+            { 
+                this.prendiFerie(g);
+            }
+            catch(FerieNonSufficienti ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            d.aggiungiFerie(g);
             return true;
         }
 
         public override string ToString()
         {
-            return Nome + " " + Cognome + " eta' " + eta + " giorni lavorativi " 
-                + giorniLavorati + " stipendio " + getStipendio();     
+            return nome + " " + cognome + " eta' " + eta + " giorni lavorativi " 
+                + giorniLavorati + " stipendio " + getStipendio() + " Ferie " + ferie;     
         }
 
+        public int CompareTo(object obj)
+        {
+            Dipendente d = obj as Dipendente;
+            if (this.eta > d.eta)
+                return 1;
+            if (this.eta < d.eta)
+                return -1;
+            return 0;
+
+        }
     }
 
 
