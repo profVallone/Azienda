@@ -38,7 +38,7 @@ namespace GestioneAzienda
             az.cediFerieRandom();
 
             Console.WriteLine("-------Dipendenti guadagno massimo-------------------------");
-            foreach(Dipendente d in az.dipendentiMaxGuadagno())
+            foreach(Dipendente d in az.dipendentiMaxStipendio())
             {
                 Console.WriteLine(d);
             }

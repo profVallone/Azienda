@@ -37,7 +37,7 @@ namespace GestioneAzienda
             return s;
         }
 
-        public List<Dipendente> dipendentiMaxGuadagno()
+        public List<Dipendente> dipendentiMaxStipendio()
         {
             List<Dipendente> lRis = new List<Dipendente>();
             Dipendente dMax = null;
