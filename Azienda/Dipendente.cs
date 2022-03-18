@@ -51,7 +51,7 @@ namespace GestioneAzienda
         {
             Console.WriteLine("Il dipendente {0} {1} ha richiesto {2} ferie", this.nome, this.cognome, g);
             if (g > this.ferie)
-                throw new FerieNonSufficienti("Hai richiesto troppe ferie!");
+                throw new FerieNonSufficienti("Richieste troppe ferie!");
             this.ferie -= g;
             return true;
         }
@@ -59,7 +59,7 @@ namespace GestioneAzienda
         public bool cediFerie(Dipendente d, int g)
         {
             if (this.GetType() != d.GetType())
-                throw new GradoDipendentiErrato("Dipendente non dello stesso grado!");
+                throw new GradoDipendentiErrato("Dipendenti non dello stesso grado!");
             try 
             { 
                 this.prendiFerie(g);

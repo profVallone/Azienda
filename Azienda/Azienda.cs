@@ -91,14 +91,17 @@ namespace GestioneAzienda
             Random r = new Random();
             foreach (Dipendente d in dipendenti)
             {
-                Console.WriteLine("Cessione ferie da --->");
-                Console.WriteLine(d);
-                Dipendente tmp = dipendenti.ElementAt<Dipendente>(r.Next(1, dipendenti.Count));
+                Console.WriteLine("Cessione ferie da ---> {0}", d);
+                int i;
+                do
+                {
+                    i = r.Next(1, dipendenti.Count);
+                } while (i == dipendenti.IndexOf(d));
+                Dipendente tmp = dipendenti.ElementAt<Dipendente>(i);
                 try
                 {
-                    Console.WriteLine("---> verso --->");
-                    Console.WriteLine(tmp);
-                    d.cediFerie(tmp, r.Next(1, 100));
+                    Console.WriteLine("---> verso --->{0}", tmp);
+                    d.cediFerie(tmp, r.Next(1, 50));
                     Console.WriteLine(tmp);
                 }
                 catch (GradoDipendentiErrato ex)

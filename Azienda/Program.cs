@@ -25,16 +25,22 @@ namespace GestioneAzienda
             
             Console.WriteLine("-------Azienda-------------------------");
             //inizializza in maniera Random i giorni lavorativi di ogni dipendente da 1 a 100
+            //attraverso il metodo
+            //addGiorni(int g); della classe Dipendente
             az.giorniRandom();
             Console.WriteLine(az);
             
             Console.WriteLine("-------Richiesta ferie-------------------------");
             //per ogni dipendente vengono richiesti giorni di ferie random tra 1 e 100
+            //attraverso il metodo
+            //prendiFerie(int g); della classe Dipendente
             az.prendiFerieRandom();
            
             Console.WriteLine("-------Cessione ferie-------------------------");
             //per ogni dipendente vengono ceduti giorni di ferie random tra 1 e 100
             //ad un altro dipendente scelto a caso
+            //attraverso il metodo
+            //cediFerie(Dipendente d, int g); della classe Dipendente
             az.cediFerieRandom();
 
             Console.WriteLine("-------Dipendenti guadagno massimo-------------------------");
@@ -45,19 +51,6 @@ namespace GestioneAzienda
 
             Console.WriteLine("-------Dipendenti in ordine di età-------------------------");
             az.stampaInOrdine();
-            
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
